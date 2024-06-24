@@ -1,4 +1,4 @@
 *.FIT
-./archive
-./transformer/in
-./transformer/out
+/archive
+/transformer/in
+/transformer/out

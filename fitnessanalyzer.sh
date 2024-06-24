@@ -1,3 +1,11 @@
-#This is the final script to transform
+# Transform from FIT file to txt file
+cd transformer
+./transformer.sh
+cd ..
 
-fitdump tp-3741880.2024-06-04-03-24-00-031Z.GarminPing.AAAAAGZeiM83ua27.FIT -t readable > test.txt
+# Parse the txt file
+File=$(ls ./transformer/out/*.txt)
+echo $File
+python3 TxtFileParser.py $File
+
+rm ./transformer/out/*.txt

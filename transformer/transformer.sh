@@ -1,17 +1,27 @@
-#!/bin/bash
-# Check if file input is empty or not
-if [ $# -eq 0 ]
-  then
-    echo "No file input"
-fi
+# State machine to check if 
 
-# Filename
-File = "$1"
+check=true
+cd ./in
+# Transformer: fitdump tp-3741880.2024-06-04-03-24-00-031Z.GarminPing.AAAAAGZeiM83ua27.FIT -t readable > test.txt
 
-# Check if file input is empty or not
-if [ ! $File == *.FIT ]
+while $check
+do
+
+# Check if there's a file in the in folder
+DoesFileExist=$(ls *.FIT)
+
+if [ -n $DoesFileExist ]
 then
-echo The input file is not a .FIT file
+mv $DoesFileExist NewName.FIT
+
+fitdump NewName.FIT -t readable > "test.txt" 
+mv test.txt ../out/
+break
+else
+echo wompwompwomp
 fi
 
-fitdump $File -t readable > test.txt
+sleep 1
+
+done
+
